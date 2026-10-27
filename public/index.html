@@ -16,6 +16,7 @@
   --in:inset 3px 3px 7px var(--sh),inset -3px -3px 7px #fff;
   --o-tint:rgba(255,103,38,.13)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{overflow-x:hidden;max-width:100%}
 body{margin:0;background:var(--bg);color:var(--k);font:400 15px/1.35 Satoshi,system-ui,sans-serif;
   padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 button,select,input{font:inherit;color:inherit}button{border:0;background:none;cursor:pointer}
@@ -31,12 +32,13 @@ button,select,input{font:inherit;color:inherit}button{border:0;background:none;c
   font-size:13px;color:var(--o);animation:glow 2.4s infinite;display:flex;align-items:center;gap:6px}
 .ibtn svg{width:15px;fill:none;stroke:var(--o);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 @keyframes glow{50%{box-shadow:var(--up-s),0 0 0 5px rgba(255,103,38,.16),0 0 18px rgba(255,103,38,.45)}}
-.cols{flex:1;display:grid;grid-template-columns:1fr;max-width:1100px;width:100%;margin:0 auto;padding:0 16px}
+.cols{flex:1;display:grid;grid-template-columns:minmax(0,1fr);max-width:1100px;width:100%;margin:0 auto;padding:0 16px}
 @media(min-width:860px){
   body{padding-bottom:0}
-  .cols{grid-template-columns:1fr 1fr;gap:28px;padding:24px 32px;align-items:start}
+  .cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;padding:24px 32px;align-items:start}
   nav{display:none!important}
   .col-book,.col-up{max-height:calc(100vh - 90px);overflow-y:auto;padding-right:6px;scrollbar-width:thin}}
+.col-book,.col-up{min-width:0}
 .col-title{display:none;font-size:13px;font-weight:700;color:var(--mut);
   letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
 @media(min-width:860px){.col-title{display:block}}
@@ -48,8 +50,8 @@ h3{margin:0 0 10px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;
 .strip-wrap:before,.strip-wrap:after{content:"";position:absolute;top:0;bottom:14px;width:22px;z-index:1;pointer-events:none}
 .strip-wrap:before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
 .strip-wrap:after{right:48px;background:linear-gradient(to left,var(--bg),transparent)}
-.strip{display:flex;gap:6px;align-items:center}
-.days{display:flex;gap:6px;flex:1;overflow-x:auto;scroll-snap-type:x mandatory;
+.strip{display:flex;gap:6px;align-items:center;min-width:0}
+.days{display:flex;gap:6px;flex:1;min-width:0;overflow-x:auto;scroll-snap-type:x mandatory;
   padding:4px 2px 6px;scrollbar-width:none}
 .days::-webkit-scrollbar{display:none}
 .day{flex:0 0 calc((100% - 42px) / 7 - 5px);min-width:36px;scroll-snap-align:start;
@@ -181,7 +183,7 @@ nav>div{max-width:520px;margin:auto}
 <div class="shell">
 <header class="hd">
   <div class="brand">
-    <div class="logo"><img src="logo-header.png" alt="" width="38" height="38"></div>
+    <div class="logo"><img src="logo-header.png" alt="" width="38" height="38" onerror="this.outerHTML='&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;2&quot; stroke-linejoin=&quot;round&quot; width=&quot;22&quot;&gt;&lt;path d=&quot;M12 3l8 4.5v9L12 21l-8-4.5v-9z&quot;/&gt;&lt;path d=&quot;M4 7.5l8 4.5 8-4.5M12 12v9&quot;/&gt;&lt;/svg&gt;'"></div>
     Book A Space
   </div>
   <button class="ibtn" id="info">
